@@ -1,0 +1,15 @@
+M:\Documents\Coding\C#\projects\FileTransferApplication\File Transfer Application\File Transfer Console\bin\Debug\net6.0\File Transfer Console.exe
+M:\Documents\Coding\C#\projects\FileTransferApplication\File Transfer Application\File Transfer Console\bin\Debug\net6.0\File Transfer Console.deps.json
+M:\Documents\Coding\C#\projects\FileTransferApplication\File Transfer Application\File Transfer Console\bin\Debug\net6.0\File Transfer Console.runtimeconfig.json
+M:\Documents\Coding\C#\projects\FileTransferApplication\File Transfer Application\File Transfer Console\bin\Debug\net6.0\File Transfer Console.dll
+M:\Documents\Coding\C#\projects\FileTransferApplication\File Transfer Application\File Transfer Console\bin\Debug\net6.0\ref\File Transfer Console.dll
+M:\Documents\Coding\C#\projects\FileTransferApplication\File Transfer Application\File Transfer Console\bin\Debug\net6.0\File Transfer Console.pdb
+M:\Documents\Coding\C#\projects\FileTransferApplication\File Transfer Application\File Transfer Console\obj\Debug\net6.0\File Transfer Console.csproj.AssemblyReference.cache
+M:\Documents\Coding\C#\projects\FileTransferApplication\File Transfer Application\File Transfer Console\obj\Debug\net6.0\File Transfer Console.GeneratedMSBuildEditorConfig.editorconfig
+M:\Documents\Coding\C#\projects\FileTransferApplication\File Transfer Application\File Transfer Console\obj\Debug\net6.0\File Transfer Console.AssemblyInfoInputs.cache
+M:\Documents\Coding\C#\projects\FileTransferApplication\File Transfer Application\File Transfer Console\obj\Debug\net6.0\File Transfer Console.AssemblyInfo.cs
+M:\Documents\Coding\C#\projects\FileTransferApplication\File Transfer Application\File Transfer Console\obj\Debug\net6.0\File Transfer Console.csproj.CoreCompileInputs.cache
+M:\Documents\Coding\C#\projects\FileTransferApplication\File Transfer Application\File Transfer Console\obj\Debug\net6.0\File Transfer Console.dll
+M:\Documents\Coding\C#\projects\FileTransferApplication\File Transfer Application\File Transfer Console\obj\Debug\net6.0\ref\File Transfer Console.dll
+M:\Documents\Coding\C#\projects\FileTransferApplication\File Transfer Application\File Transfer Console\obj\Debug\net6.0\File Transfer Console.pdb
+M:\Documents\Coding\C#\projects\FileTransferApplication\File Transfer Application\File Transfer Console\obj\Debug\net6.0\File Transfer Console.genruntimeconfig.cache
