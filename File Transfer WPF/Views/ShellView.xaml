@@ -6,10 +6,8 @@
              xmlns:local="clr-namespace:File_Transfer_WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <Label Content="Hello this is a test..." />
-        <TextBox x:Name="Name" />
-        <Button x:Name="SayHello"
-                Content="Click Here" />
-    </StackPanel>
+    <Grid>
+        <Label Content="This label shows that it failed."></Label>
+        <ContentControl x:Name="ActiveItem" />
+    </Grid>
 </UserControl>
