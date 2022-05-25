@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,17 +13,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace File_Transfer_WPF.Views
 {
     /// <summary>
     /// Interaction logic for TransferView.xaml
     /// </summary>
-    public partial class TransferView : Page
+    public partial class TransferView
     {
         public TransferView()
         {
             InitializeComponent();
+            var dialog = new FolderBrowserDialog();
+            dialog.ShowDialog();
+            ///TODO put into ViewModel for dialog box
         }
     }
 }

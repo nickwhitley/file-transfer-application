@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using File_Transfer_WPF.Models;
 using File_Transfer_WPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -27,9 +28,8 @@ namespace File_Transfer_WPF
 
             _container
                 .Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator, EventAggregator>();
-
-            _container.PerRequest<ShellViewModel>();
+                .Singleton<IEventAggregator, EventAggregator>()
+                .Singleton<ITransferModel, TransferModel>();
 
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)
@@ -38,6 +38,11 @@ namespace File_Transfer_WPF
                 .ForEach(viewModelType => _container.RegisterPerRequest(
                     viewModelType, viewModelType.ToString(), viewModelType));
 
+        }
+
+        protected override void OnStartup(object sender, StartupEventArgs e)
+        {
+            DisplayRootViewFor<ShellViewModel>();
         }
 
         protected override object GetInstance(Type service, string key)
@@ -53,11 +58,6 @@ namespace File_Transfer_WPF
         protected override void BuildUp(object instance)
         {
             _container.BuildUp(instance);
-        }
-
-        protected override void OnStartup(object sender, StartupEventArgs e)
-        {
-            DisplayRootViewFor<ShellViewModel>();
         }
     }
 }

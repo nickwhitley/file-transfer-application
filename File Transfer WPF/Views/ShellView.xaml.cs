@@ -18,7 +18,7 @@ namespace File_Transfer_WPF.Views
     /// <summary>
     /// Interaction logic for ShellView.xaml
     /// </summary>
-    public partial class ShellView : UserControl
+    public partial class ShellView
     {
         public ShellView()
         {
