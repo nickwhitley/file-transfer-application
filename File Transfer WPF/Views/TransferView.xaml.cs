@@ -25,9 +25,7 @@ namespace File_Transfer_WPF.Views
         public TransferView()
         {
             InitializeComponent();
-            var dialog = new FolderBrowserDialog();
-            dialog.ShowDialog();
-            ///TODO put into ViewModel for dialog box
+            
         }
     }
 }

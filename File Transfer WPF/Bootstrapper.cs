@@ -3,6 +3,7 @@ using File_Transfer_WPF.Models;
 using File_Transfer_WPF.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -42,7 +43,9 @@ namespace File_Transfer_WPF
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            DisplayRootViewFor<ShellViewModel>();
+            dynamic settings = new ExpandoObject();
+            settings.ResizeMode = ResizeMode.NoResize;
+            DisplayRootViewFor<ShellViewModel>(settings);
         }
 
         protected override object GetInstance(Type service, string key)
