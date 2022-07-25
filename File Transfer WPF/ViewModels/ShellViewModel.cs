@@ -5,16 +5,18 @@ using System.Threading.Tasks;
 
 namespace File_Transfer_WPF.ViewModels
 {
-    internal class ShellViewModel: Conductor<Screen>.Collection.OneActive
+    internal class ShellViewModel : Conductor<Screen>.Collection.OneActive
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly TransferViewModel _transferViewModel;
+        private string _displayName = "File Transfer Application";
 
         public ShellViewModel(IEventAggregator eventAggregator, TransferViewModel transferViewModel,
                                 ITransferModel transferModel)
         {
             _eventAggregator = eventAggregator;
             _transferViewModel = transferViewModel;
+            this.DisplayName = _displayName;
 
             Items.AddRange(new Screen[] { transferViewModel });
         }
