@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Dynamic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,8 @@ namespace File_Transfer_WPF.ViewModels
 
         private string _sourceFolderPath;
         private string _targetFolderPath;
+        private string _sourceFileCount;
+        private string _targetFileCount;
 
         public string SourceFolderPath 
         { 
@@ -46,6 +49,27 @@ namespace File_Transfer_WPF.ViewModels
                 OnPropertyChanged("TargetFolderPath");
             }
         }
+
+        public string SourceFileCount 
+        { 
+            get => _sourceFileCount; 
+            set 
+            {
+                _sourceFileCount = value;
+                OnPropertyChanged("SourceFileCount");
+            }
+        }
+
+        public string TargetFileCount 
+        { 
+            get => _targetFileCount; 
+            set
+            {
+                _targetFileCount = value;
+                OnPropertyChanged("TargetFileCount");
+            }
+        }
+
         public TransferViewModel(IEventAggregator eventAggregator, ITransferModel transferModel)
         {
             _eventAggregator = eventAggregator;
@@ -62,6 +86,16 @@ namespace File_Transfer_WPF.ViewModels
             dialog.Description = "Source Folder path select.";
             dialog.ShowDialog();
             SourceFolderPath = dialog.SelectedPath;
+            SetSourceFileCount(dialog.SelectedPath);
+        }
+
+        private void SetSourceFileCount(string selectedPath)
+        {
+            if (Directory.Exists(selectedPath))
+            {
+                int numOfFiles = Directory.GetFiles(selectedPath).Length;
+                SourceFileCount = numOfFiles.ToString();
+            }
         }
 
         public void TargetBrowseClick()
@@ -70,6 +104,16 @@ namespace File_Transfer_WPF.ViewModels
             dialog.Description = "Target Folder path select.";
             dialog.ShowDialog();
             TargetFolderPath = dialog.SelectedPath;
+            SetTargetFileCount(dialog.SelectedPath);
+        }
+
+        private void SetTargetFileCount(string selectedPath)
+        {
+            if (Directory.Exists(selectedPath))
+            {
+                int numOfFiles = Directory.GetFiles(selectedPath).Length;
+                TargetFileCount = numOfFiles.ToString();
+            }
         }
     }
 }

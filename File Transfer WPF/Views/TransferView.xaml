@@ -17,12 +17,12 @@
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.Column="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2.3*"/>
+                <ColumnDefinition Width="2.5*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
@@ -54,10 +54,35 @@
                     </i:Interaction.Triggers>
                 </Button>
             </StackPanel>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2.5*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1.45*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Row="1" Grid.Column="0">
+                    <Label Content="Files Found:"
+                       Foreground="White"
+                       FontSize="15"
+                       VerticalAlignment="Center"
+                       />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="1">
+                    <Label x:Name="SourceFileCount"
+                           Foreground="White"
+                           FontSize="15"
+                           VerticalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
         </Grid>
+        
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2.3*"/>
+                <ColumnDefinition Width="2.5*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
@@ -89,6 +114,29 @@
                 </Button>
                         
             </StackPanel>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2.5*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1.45*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Row="1" Grid.Column="0">
+                    <Label Content="Files Found:"
+                           Foreground="White"
+                           FontSize="15"
+                           VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="1">
+                    <Label x:Name="TargetFileCount"
+                           Foreground="White"
+                           FontSize="15"
+                           VerticalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
         </Grid>
 
     </Grid>
