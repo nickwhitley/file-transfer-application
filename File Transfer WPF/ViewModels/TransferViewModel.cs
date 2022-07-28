@@ -7,6 +7,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -29,6 +30,7 @@ namespace File_Transfer_WPF.ViewModels
         private string _targetFolderPath;
         private string _sourceFileCount;
         private string _targetFileCount;
+        private string _errorMessage;
 
         public string SourceFolderPath 
         { 
@@ -39,7 +41,6 @@ namespace File_Transfer_WPF.ViewModels
                 OnPropertyChanged("SourceFolderPath");
             } 
         }
-
         public string TargetFolderPath 
         { 
             get => _targetFolderPath; 
@@ -49,7 +50,6 @@ namespace File_Transfer_WPF.ViewModels
                 OnPropertyChanged("TargetFolderPath");
             }
         }
-
         public string SourceFileCount 
         { 
             get => _sourceFileCount; 
@@ -59,7 +59,6 @@ namespace File_Transfer_WPF.ViewModels
                 OnPropertyChanged("SourceFileCount");
             }
         }
-
         public string TargetFileCount 
         { 
             get => _targetFileCount; 
@@ -67,6 +66,15 @@ namespace File_Transfer_WPF.ViewModels
             {
                 _targetFileCount = value;
                 OnPropertyChanged("TargetFileCount");
+            }
+        }
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set 
+            { 
+                _errorMessage = value;
+                OnPropertyChanged("ErrorMessage");
             }
         }
 
@@ -86,14 +94,14 @@ namespace File_Transfer_WPF.ViewModels
             dialog.Description = "Source Folder path select.";
             dialog.ShowDialog();
             SourceFolderPath = dialog.SelectedPath;
-            SetSourceFileCount(dialog.SelectedPath);
+            SetSourceFileCount();
         }
 
-        private void SetSourceFileCount(string selectedPath)
+        private void SetSourceFileCount()
         {
-            if (Directory.Exists(selectedPath))
+            if (Directory.Exists(SourceFolderPath))
             {
-                int numOfFiles = Directory.GetFiles(selectedPath).Length;
+                int numOfFiles = Directory.GetFiles(SourceFolderPath).Length;
                 SourceFileCount = numOfFiles.ToString();
             }
         }
@@ -104,15 +112,58 @@ namespace File_Transfer_WPF.ViewModels
             dialog.Description = "Target Folder path select.";
             dialog.ShowDialog();
             TargetFolderPath = dialog.SelectedPath;
-            SetTargetFileCount(dialog.SelectedPath);
+            SetTargetFileCount();
         }
 
-        private void SetTargetFileCount(string selectedPath)
+        private void SetTargetFileCount()
         {
-            if (Directory.Exists(selectedPath))
+            if (Directory.Exists(TargetFolderPath))
             {
-                int numOfFiles = Directory.GetFiles(selectedPath).Length;
+                int numOfFiles = Directory.GetFiles(TargetFolderPath).Length;
                 TargetFileCount = numOfFiles.ToString();
+            }
+        }
+
+        public void TransferClick()
+        {
+            ErrorMessage = " ";
+            if (!ErrorCheck())
+            {
+                return;
+            }
+            else
+
+                TransferFiles();
+
+            SetSourceFileCount();
+            SetTargetFileCount();
+        }
+
+        private bool ErrorCheck()
+        {
+            if(TargetFolderPath == null || TargetFolderPath.Length == 0)
+            {
+                ErrorMessage = "Invalid target folder path.";
+                return false;
+            } else if(SourceFolderPath == null || SourceFolderPath.Length == 0)
+            {
+                ErrorMessage = "Invalid source folder path.";
+                return false;
+            } else if(SourceFileCount.Equals(0))
+            {
+                ErrorMessage = "There are 0 files in the source folder.";
+                return false;
+            }
+
+            return true;
+        }
+
+        private void TransferFiles()
+        {
+            foreach (var file in Directory.GetFiles(SourceFolderPath))
+            {
+                string fileName = Path.GetFileName(file);
+                File.Move(file, TargetFolderPath + "\\" + fileName);
             }
         }
     }

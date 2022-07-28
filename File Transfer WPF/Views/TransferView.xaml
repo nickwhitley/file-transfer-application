@@ -139,5 +139,43 @@
             </Grid>
         </Grid>
 
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="6*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="0">
+                <Label x:Name="ErrorMessage"
+                       Foreground="DarkRed"
+                       FontSize="25"
+                       />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3.5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" 
+                        VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
+                <Button x:Name="TransferButton"
+                        Content="Transfer"
+                        Width="120"
+                        Height="45"
+                        FontSize="25"
+                        Background="White"
+                        Foreground="Black"
+                        >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <cal:ActionMessage MethodName="TransferClick"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
