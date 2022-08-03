@@ -157,9 +157,19 @@
                         Grid.Row="1">
                 <Label Content="Transfer Info:" Foreground="White" FontSize="25"/>
                 <StackPanel Orientation="Horizontal">
-                    <ListBox x:Name="OriginFilesList"></ListBox>
-                    <Label Content=">>>" Foreground="White" FontSize="45"/>
-                    <ListBox x:Name="TargetFilesList"></ListBox>
+                    <ListBox x:Name="SourceFilesList" 
+                             Width="285"
+                             Height="200"
+                             Margin="20 5 0 0"></ListBox>
+                    <Label Content=">>>" 
+                           Foreground="White" 
+                           FontSize="45"
+                           VerticalAlignment="Center"/>
+                    <ListBox x:Name="TargetFilesList" 
+                             Width="285"
+                             Height="200"
+                             Margin="0 5 0 0"></ListBox>
+                    
                 </StackPanel>
                 
             </StackPanel>
