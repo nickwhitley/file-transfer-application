@@ -33,6 +33,7 @@ namespace File_Transfer_WPF.ViewModels
         private string _errorMessage;
         private BindableCollection<string> _sourceFilesList = new BindableCollection<string>();
         private BindableCollection<string> _targetFilesList = new BindableCollection<string>();
+        private BindableCollection<string> _extensions = new BindableCollection<string>();
 
         public string SourceFolderPath
         {
@@ -98,6 +99,16 @@ namespace File_Transfer_WPF.ViewModels
             }
         }
 
+        public BindableCollection<string> Extensions
+        {
+            get => _extensions;
+            set
+            {
+                _extensions = value;
+                OnPropertyChanged("Extensions");
+            }
+        }
+
         public TransferViewModel(IEventAggregator eventAggregator, ITransferModel transferModel)
         {
             _eventAggregator = eventAggregator;
@@ -116,6 +127,7 @@ namespace File_Transfer_WPF.ViewModels
             SourceFolderPath = dialog.SelectedPath;
             SetSourceFileCount();
             PopulateSourceFilesList();
+            PopulateExtensionsList();
         }
 
         private void SetSourceFileCount()
@@ -220,6 +232,7 @@ namespace File_Transfer_WPF.ViewModels
             if (Directory.Exists(TargetFolderPath))
             {
                 var newList = new BindableCollection<string>();
+
                 foreach(var file in Directory.GetFiles(TargetFolderPath))
                 {
                     string fileName = Path.GetFileName(file);
@@ -227,6 +240,21 @@ namespace File_Transfer_WPF.ViewModels
                 }
                 TargetFilesList = newList;
             }
+        }
+
+        private void PopulateExtensionsList()
+        {
+            var newList = new BindableCollection<string>();
+
+            foreach(var file in Directory.GetFiles(SourceFolderPath))
+            {
+                string extension = Path.GetExtension(file);
+                if (!newList.Contains(extension))
+                {
+                    newList.Add(extension);
+                }
+            }
+            Extensions = newList;
         }
     }
 }
