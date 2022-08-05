@@ -115,8 +115,9 @@
                     <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
                         <Label x:Name="ErrorMessage"
-                               Foreground="DarkRed"
-                               FontSize="25"/>
+                               Foreground="LightCoral"
+                               FontSize="25"
+                               Margin="20 0 0 0"/>
                     </StackPanel>
                     <!-- file view area -->
                     <StackPanel Grid.Row="1"
@@ -138,6 +139,7 @@
             </Grid>
         </Grid>
         <!--#endregion-->
+        <!--#region right panel-->
         <Grid Grid.Column="1">
             <Grid>
                 <Grid.RowDefinitions>
@@ -145,28 +147,38 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <!-- extensions table -->
+                <!--#region extensions table -->
                 <StackPanel Grid.Row="0"
                             Orientation="Vertical"
-                            Background="White">
-                    <ListView x:Name="Files">
+                            Background="White"
+                            >
+                    <Label Content="File Types:"/>
+                    <TextBlock Text="*Please select the file types you want to transfer."
+                           FontSize="8"
+                           TextWrapping="Wrap"
+                           />
+                    <ListView x:Name="Files"
+                              BorderBrush="White"
+                              Background="LightGray">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <CheckBox IsChecked="True" 
-                                              Height="18"
-                                              Width="18"
-                                              VerticalAlignment="Center"/>
+                                              Height="15"
+                                              Width="15"
+                                              VerticalAlignment="Center"
+                                              cal:Message.Attach="[Event Click] = [Action UpdateFileList($dataContext)]"/>
                                     <TextBlock Text="{Binding Extension}"
-                                               Margin="5"
-                                               FontSize="15"
+                                               Margin="8 3 0 3"
+                                               FontSize="18"
                                                VerticalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                 </StackPanel>
-                <!-- transfer button -->
+                <!--#endregion-->
+                <!--#region transfer button -->
                 <StackPanel Grid.Row="1"
                             Orientation="Vertical">
                     <Button x:Name="TransferButton"
@@ -184,7 +196,9 @@
                         </i:Interaction.Triggers>
                     </Button>
                 </StackPanel>
+                <!--#endregion-->
             </Grid>
         </Grid>
+        <!--#endregion right panel-->
     </Grid>
 </UserControl>

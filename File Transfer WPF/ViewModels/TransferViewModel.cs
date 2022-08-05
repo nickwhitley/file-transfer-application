@@ -200,10 +200,27 @@ namespace File_Transfer_WPF.ViewModels
             foreach (var file in Directory.GetFiles(SourceFolderPath))
             {
                 string fileName = Path.GetFileName(file);
-                File.Move(file, TargetFolderPath + "\\" + fileName);
+                string fileExtension = Path.GetExtension(file);
+                if (FileIsSelected(fileExtension))
+                {
+                    File.Move(file, TargetFolderPath + "\\" + fileName);
+                }
             }
             PopulateSourceFilesList();
             PopulateTargetFilesList();
+        }
+
+        private bool FileIsSelected(string fileExtension)
+        {
+            var fileModel = Files.Where(fileModel => fileModel.Extension == fileExtension).First();
+            
+            if (fileModel.IsSelected)
+            {
+                return true;
+            } 
+            else
+                return false;
+
         }
 
         private void PopulateSourceFilesList()
@@ -260,6 +277,15 @@ namespace File_Transfer_WPF.ViewModels
                 }
             }
             Files = newList;
+        }
+
+        public void UpdateFileList(FileModel fileModel)
+        {
+            if(fileModel.IsSelected == false)
+            {
+                fileModel.IsSelected = true;
+            } else 
+                fileModel.IsSelected = false;
         }
     }
 }

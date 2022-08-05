@@ -18,5 +18,6 @@ namespace File_Transfer_WPF.Models
             set { _extension = value; }
         }
 
+        public bool IsSelected { get; set; } = true;
     }
 }
