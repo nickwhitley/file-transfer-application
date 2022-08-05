@@ -17,97 +17,87 @@ namespace File_Transfer_WPF.ViewModels
 {
     internal class TransferViewModel : Screen, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        
         private readonly IEventAggregator _eventAggregator;
         private ITransferModel _transferModel;
         private readonly IWindowManager _windowManager;
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private string _sourceFolderPath;
-        private string _targetFolderPath;
-        private string _sourceFileCount;
-        private string _targetFileCount;
-        private string _errorMessage;
-        private BindableCollection<string> _sourceFilesList = new BindableCollection<string>();
-        private BindableCollection<string> _targetFilesList = new BindableCollection<string>();
-        private BindableCollection<FileModel> _files = new BindableCollection<FileModel>();
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public string SourceFolderPath
         {
-            get => _sourceFolderPath;
+            get => _transferModel.SourceFolderPath;
             set
             {
-                _sourceFolderPath = value;
+                _transferModel.SourceFolderPath = value;
                 OnPropertyChanged("SourceFolderPath");
             }
         }
         public string TargetFolderPath
         {
-            get => _targetFolderPath;
+            get => _transferModel.TargetFolderPath;
             set
             {
-                _targetFolderPath = value;
+                _transferModel.TargetFolderPath = value;
                 OnPropertyChanged("TargetFolderPath");
             }
         }
         public string SourceFileCount
         {
-            get => _sourceFileCount;
+            get => _transferModel.SourceFileCount;
             set
             {
-                _sourceFileCount = value;
+                _transferModel.SourceFileCount = value;
                 OnPropertyChanged("SourceFileCount");
             }
         }
         public string TargetFileCount
         {
-            get => _targetFileCount;
+            get => _transferModel.TargetFileCount;
             set
             {
-                _targetFileCount = value;
+                _transferModel.TargetFileCount = value;
                 OnPropertyChanged("TargetFileCount");
             }
         }
         public string ErrorMessage
         {
-            get => _errorMessage;
+            get => _transferModel.ErrorMessage;
             set
             {
-                _errorMessage = value;
+                _transferModel.ErrorMessage = value;
                 OnPropertyChanged("ErrorMessage");
             }
         }
         public BindableCollection<string> SourceFilesList
         {
-            get => _sourceFilesList;
+            get => _transferModel.SourceFilesList;
             set
             {
-                _sourceFilesList = value;
+                _transferModel.SourceFilesList = value;
                 OnPropertyChanged("SourceFilesList");
             }
         }
         public BindableCollection<string> TargetFilesList
         {
-            get => _targetFilesList;
+            get => _transferModel.TargetFilesList;
             set
             {
-                _targetFilesList = value;
+                _transferModel.TargetFilesList = value;
                 OnPropertyChanged("TargetFilesList");
             }
         }
-
         public BindableCollection<FileModel> Files
         {
-            get => _files;
+            get => _transferModel.Files;
             set
             {
-                _files = value;
+                _transferModel.Files = value;
                 OnPropertyChanged("Files");
             }
+        }
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public TransferViewModel(IEventAggregator eventAggregator, ITransferModel transferModel)
@@ -125,19 +115,19 @@ namespace File_Transfer_WPF.ViewModels
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
             dialog.Description = "Source Folder path select.";
             dialog.ShowDialog();
-            SourceFolderPath = dialog.SelectedPath;
-            SetSourceFileCount();
-            PopulateSourceFilesList();
-            PopulateFilesList();
+            if (Directory.Exists(dialog.SelectedPath))
+            {
+                SourceFolderPath = dialog.SelectedPath;
+                SetSourceFileCount();
+                PopulateSourceFilesList();
+                PopulateFilesList();
+            }
         }
 
         private void SetSourceFileCount()
         {
-            if (Directory.Exists(SourceFolderPath))
-            {
-                int numOfFiles = Directory.GetFiles(SourceFolderPath).Length;
-                SourceFileCount = numOfFiles.ToString();
-            }
+            int numOfFiles = Directory.GetFiles(SourceFolderPath).Length;
+            SourceFileCount = numOfFiles.ToString();
         }
 
         public void TargetBrowseClick()
@@ -145,18 +135,18 @@ namespace File_Transfer_WPF.ViewModels
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
             dialog.Description = "Target Folder path select.";
             dialog.ShowDialog();
-            TargetFolderPath = dialog.SelectedPath;
-            SetTargetFileCount();
-            PopulateTargetFilesList();
+            if (Directory.Exists(dialog.SelectedPath))
+            {
+                TargetFolderPath = dialog.SelectedPath;
+                SetTargetFileCount();
+                PopulateTargetFilesList();
+            }
         }
 
         private void SetTargetFileCount()
         {
-            if (Directory.Exists(TargetFolderPath))
-            {
-                int numOfFiles = Directory.GetFiles(TargetFolderPath).Length;
-                TargetFileCount = numOfFiles.ToString();
-            }
+            int numOfFiles = Directory.GetFiles(TargetFolderPath).Length;
+            TargetFileCount = numOfFiles.ToString();
         }
 
         public void TransferClick()
@@ -167,7 +157,6 @@ namespace File_Transfer_WPF.ViewModels
                 return;
             }
             else
-
                 TransferFiles();
 
             SetSourceFileCount();
@@ -213,11 +202,11 @@ namespace File_Transfer_WPF.ViewModels
         private bool FileIsSelected(string fileExtension)
         {
             var fileModel = Files.Where(fileModel => fileModel.Extension == fileExtension).First();
-            
+
             if (fileModel.IsSelected)
             {
                 return true;
-            } 
+            }
             else
                 return false;
 

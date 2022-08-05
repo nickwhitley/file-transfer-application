@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace File_Transfer_WPF.Models
 {
-    internal class FileModel
+    internal class FileModel : IFileModel
     {
 
         private string _extension;
