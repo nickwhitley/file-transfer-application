@@ -152,11 +152,10 @@
                             Orientation="Vertical"
                             Background="White"
                             >
-                    <Label Content="File Types:"/>
-                    <TextBlock Text="*Please select the file types you want to transfer."
-                           FontSize="8"
-                           TextWrapping="Wrap"
-                           />
+                    <TextBlock Text="File Types to transfer:"
+                           FontSize="14"
+                           Margin="5 0 8 0"
+                           FontWeight="SemiBold"/>
                     <ListView x:Name="Files"
                               BorderBrush="White"
                               Background="LightGray">
