@@ -15,7 +15,7 @@
             <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-<!--#region left panel-->
+        <!--#region left panel-->
         <Grid Grid.Column="0">
             <Grid>
                 <Grid.RowDefinitions>
@@ -137,7 +137,7 @@
                 <!--#endregion File viewer/error view panel-->
             </Grid>
         </Grid>
-<!--#endregion-->
+        <!--#endregion-->
         <Grid Grid.Column="1">
             <Grid>
                 <Grid.RowDefinitions>
@@ -149,9 +149,22 @@
                 <StackPanel Grid.Row="0"
                             Orientation="Vertical"
                             Background="White">
-                    <ListBox x:Name="Extensions">
-                        
-                    </ListBox>
+                    <ListView x:Name="Files">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox IsChecked="True" 
+                                              Height="18"
+                                              Width="18"
+                                              VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Extension}"
+                                               Margin="5"
+                                               FontSize="15"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </StackPanel>
                 <!-- transfer button -->
                 <StackPanel Grid.Row="1"
@@ -174,208 +187,4 @@
             </Grid>
         </Grid>
     </Grid>
-<!--
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2.5*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0">
-                <Label Content="Source Folder Path"
-                       HorizontalAlignment="Left"
-                       Padding="15,15,0,15"
-                       FontSize="20"
-                       Foreground="White"/>
-                <TextBox x:Name="SourceFolderPath"
-                         Width="400" 
-                         Height="30" 
-                         Padding="0,0,0,0" 
-                         Margin="0,0,0,0"
-                         Background="#FFEFEFEF"
-                         BorderBrush="Black"
-                         FontSize="15"
-                         Foreground="Black"
-                         IsEnabled="false"/>
-                <Button x:Name="SourceBrowseButton" 
-                        Content="Browse..." 
-                        Width="65"
-                        Height="30"
-                        HorizontalAlignment="Right"
-                        Margin="0,-30,0,0"
-                        Padding="0,0,0,0">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <cal:ActionMessage MethodName="SourceBrowseClick"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
-            </StackPanel>
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2.5*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="1.45*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Row="1" Grid.Column="0">
-                    <Label Content="Files Found:"
-                       Foreground="White"
-                       FontSize="15"
-                       VerticalAlignment="Center"
-                       />
-                </StackPanel>
-                <StackPanel Grid.Row="1" Grid.Column="1">
-                    <Label x:Name="SourceFileCount"
-                           Foreground="White"
-                           FontSize="15"
-                           VerticalAlignment="Center"/>
-                </StackPanel>
-            </Grid>
-        </Grid>
-
-        <Grid Grid.Row="0" Grid.Column="1">
-            <StackPanel Orientation="Vertical"
-                        HorizontalAlignment="Left"
-                        Width="150"
-                        Height="700"
-                        Background="White"
-                        >
-                <ListBox x:Name="Extensions">
-                    
-                </ListBox> 
-            </StackPanel>
-        </Grid>
-        
-        <Grid Grid.Row="1" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2.5*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0">
-                <Label Content="Target Folder Path"
-                       HorizontalAlignment="Left"
-                       Padding="15,15,0,15"
-                       FontSize="20"
-                       Foreground="White"/>
-                <TextBox x:Name="TargetFolderPath"
-                         Width="400" 
-                         Height="30" 
-                         Padding="0,0,0,0" 
-                         Background="#FFEFEFEF" 
-                         BorderBrush="Black"
-                         FontSize="15"
-                         Foreground="Black"
-                         IsEnabled="False"/>
-                <Button x:Name="TargetBrowseButton" 
-                        Content="Browse..." 
-                        Width="65"
-                        Height="30"
-                        HorizontalAlignment="Right"
-                        Margin="0,-30,0,0"
-                        Padding="0,0,0,0">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <cal:ActionMessage MethodName="TargetBrowseClick"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
-                        
-            </StackPanel>
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2.5*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="1.45*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Row="1" Grid.Column="0">
-                    <Label Content="Files Found:"
-                           Foreground="White"
-                           FontSize="15"
-                           VerticalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel Grid.Row="1" Grid.Column="1">
-                    <Label x:Name="TargetFileCount"
-                           Foreground="White"
-                           FontSize="15"
-                           VerticalAlignment="Center"/>
-                </StackPanel>
-            </Grid>
-        </Grid>
-
-        <Grid Grid.Row="2" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="6*"/>
-            </Grid.RowDefinitions>
-
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <Label x:Name="ErrorMessage"
-                       Foreground="DarkRed"
-                       FontSize="25"
-                       />
-            </StackPanel>
-            <StackPanel Orientation="Vertical"
-                        Grid.Row="1">
-                <Label Content="Transfer Info:" Foreground="White" FontSize="25"/>
-                <StackPanel Orientation="Horizontal">
-                    <ListBox x:Name="SourceFilesList" 
-                             Width="285"
-                             Height="200"
-                             Margin="20 5 0 0"></ListBox>
-                    <Label Content=">>>" 
-                           Foreground="White" 
-                           FontSize="45"
-                           VerticalAlignment="Center"/>
-                    <ListBox x:Name="TargetFilesList" 
-                             Width="285"
-                             Height="200"
-                             Margin="0 5 0 0"></ListBox>
-                    
-                </StackPanel>
-                
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Row="2" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3.5*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" 
-                        VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
-                <Button x:Name="TransferButton"
-                        Content="Transfer"
-                        Width="120"
-                        Height="45"
-                        FontSize="25"
-                        Background="White"
-                        Foreground="Black"
-                        >
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <cal:ActionMessage MethodName="TransferClick"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
-            </StackPanel>
-        </Grid>
-    </Grid>
-    -->
 </UserControl>

@@ -2,6 +2,7 @@
 using File_Transfer_WPF.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Dynamic;
 using System.IO;
@@ -33,7 +34,7 @@ namespace File_Transfer_WPF.ViewModels
         private string _errorMessage;
         private BindableCollection<string> _sourceFilesList = new BindableCollection<string>();
         private BindableCollection<string> _targetFilesList = new BindableCollection<string>();
-        private BindableCollection<string> _extensions = new BindableCollection<string>();
+        private BindableCollection<FileModel> _files = new BindableCollection<FileModel>();
 
         public string SourceFolderPath
         {
@@ -99,13 +100,13 @@ namespace File_Transfer_WPF.ViewModels
             }
         }
 
-        public BindableCollection<string> Extensions
+        public BindableCollection<FileModel> Files
         {
-            get => _extensions;
+            get => _files;
             set
             {
-                _extensions = value;
-                OnPropertyChanged("Extensions");
+                _files = value;
+                OnPropertyChanged("Files");
             }
         }
 
@@ -127,7 +128,7 @@ namespace File_Transfer_WPF.ViewModels
             SourceFolderPath = dialog.SelectedPath;
             SetSourceFileCount();
             PopulateSourceFilesList();
-            PopulateExtensionsList();
+            PopulateFilesList();
         }
 
         private void SetSourceFileCount()
@@ -242,19 +243,23 @@ namespace File_Transfer_WPF.ViewModels
             }
         }
 
-        private void PopulateExtensionsList()
+        private void PopulateFilesList()
         {
-            var newList = new BindableCollection<string>();
+            var newList = new BindableCollection<FileModel>();
+            var extensionsList = new Collection<string>();
 
             foreach(var file in Directory.GetFiles(SourceFolderPath))
             {
                 string extension = Path.GetExtension(file);
-                if (!newList.Contains(extension))
+                
+                if (!extensionsList.Contains(extension))
                 {
-                    newList.Add(extension);
+                    extensionsList.Add(extension);
+                    var newFileRecord = new FileModel { Extension = extension };
+                    newList.Add(newFileRecord);
                 }
             }
-            Extensions = newList;
+            Files = newList;
         }
     }
 }
